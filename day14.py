@@ -33,22 +33,26 @@ if __name__ == "__main__":
     while True:
         if (500, 0) in scan:
             break
-        location = np.array([500,0])
+        #location = np.array([500,0])
+        locationx = 500
+        locationy = 0
         while True:
-            if not tuple(location + [0,1]) in scan:
-                if not sol1 and location[1] >= bottom:
+            if not (locationx, locationy+1) in scan:
+                if not sol1 and locationy >= bottom:
                     sol1 = sands
-                if location[1] > bottom:
-                    scan[tuple(location)] = 1
+                if locationy > bottom:
+                    scan[(locationx, locationy)] = 1
                     sands += 1
                     break
-                location = location + [0,1]
-            elif not tuple(location + [-1,1]) in scan:
-                location = location + [-1,1]
-            elif not tuple(location + [1,1]) in scan:
-                location = location + [1,1]
+                locationy += 1
+            elif not (locationx-1, locationy+1) in scan:
+                locationx -= 1
+                locationy += 1
+            elif not (locationx+1, locationy+1) in scan:
+                locationx += 1
+                locationy += 1
             else:
-                scan[tuple(location)] = 1
+                scan[(locationx, locationy)] = 1
                 sands += 1
                 break
 
